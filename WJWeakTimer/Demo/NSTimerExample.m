@@ -43,18 +43,17 @@
     
     /// Block Type
     // 当滑动界面中的textView是会导致计时器暂停计时
-//    self.timerHelper = [WJNSTimerHelper scheduledTimer:1 block:^(WJNSTimerHelper * _Nonnull timerHelper) {
-//        NSLog(@"----------DefaultRunLoopMode:%@", timerHelper);
-//    }];
+    self.timerHelper = [WJNSTimerHelper scheduledTimer:1 block:^(WJNSTimerHelper * _Nonnull timerHelper) {
+        NSLog(@"----------DefaultRunLoopMode:%@", timerHelper);
+    }];
     
     // 当滑动界面中的textView时不会导致计时器暂停计时
-//    self.timerHelper = [WJNSTimerHelper scheduledTimerInCommonModes:1 repeats:YES block:^(WJNSTimerHelper * _Nonnull timerHelper) {
+//    self.timerHelper = [WJNSTimerHelper scheduledTimerInCommonModes:3 repeats:NO block:^(WJNSTimerHelper * _Nonnull timerHelper) {
 //        NSLog(@"----------CommonRunLoopModes:%@", timerHelper);
 //    }];
     
     // Normal Type
-    self.timerHelper = [WJNSTimerHelper scheduledTimer:1 target:self selector:@selector(timerAction:) repeats:YES];
-    
+//    self.timerHelper = [WJNSTimerHelper scheduledTimer:4 target:self selector:@selector(timerAction:) repeats:YES];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

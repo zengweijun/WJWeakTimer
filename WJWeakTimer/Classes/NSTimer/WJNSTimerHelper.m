@@ -102,8 +102,8 @@
                        repeats:(BOOL)repeats
             pauseWhenSlidingUI:(BOOL)pauseWhenSlidingUI {
     
-    return [self scheduledTimerWithDelay:0.f
-                            timeInterval:interval
+    return [self scheduledTimerWithDelay:interval
+                                interval:interval
                                   target:aTarget
                                 selector:aSelector
                                 userInfo:nil
@@ -113,7 +113,7 @@
 }
 
 + (instancetype)scheduledTimerWithDelay:(NSTimeInterval)delay
-                           timeInterval:(NSTimeInterval)timeInterval
+                               interval:(NSTimeInterval)interval
                                  target:(id)aTarget
                                selector:(SEL)aSelector
                                userInfo:(nullable id)userInfo
@@ -122,11 +122,11 @@
                            runLoopModel:(NSRunLoopMode)mode {
     
     WJNSTimerHelper *timerHelper = [[WJNSTimerHelper alloc] initTimerHelperWithDelay:delay
-                                                                    timeInterval:timeInterval
-                                                                          target:aTarget
-                                                                        selector:aSelector
-                                                                        userInfo:userInfo
-                                                                         repeats:yesOrNo];
+                                                                            interval:interval
+                                                                              target:aTarget
+                                                                            selector:aSelector
+                                                                            userInfo:userInfo
+                                                                             repeats:yesOrNo];
     NSRunLoop *aRunLoop = runLoop ? runLoop : [NSRunLoop currentRunLoop];
     NSRunLoopMode aModel = mode ? mode : NSDefaultRunLoopMode;
     [aRunLoop addTimer:timerHelper.timer forMode:aModel];
@@ -152,22 +152,22 @@
 }
 
 #pragma mark - Instance method
-- (instancetype)initTimerHelperWithTimeInterval:(NSTimeInterval)timeInterval
-                                         target:(id)aTarget
-                                       selector:(SEL)aSelector
-                                       userInfo:(nullable id)userInfo
-                                        repeats:(BOOL)yesOrNo {
+- (instancetype)initTimerHelperWithInterval:(NSTimeInterval)interval
+                                     target:(id)aTarget
+                                   selector:(SEL)aSelector
+                                   userInfo:(nullable id)userInfo
+                                    repeats:(BOOL)yesOrNo {
     
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-    return [self initTimerHelperWithDelay:0.0 timeInterval:timeInterval target:aTarget selector:aSelector userInfo:userInfo repeats:yesOrNo];
+    return [self initTimerHelperWithDelay:interval interval:interval target:aTarget selector:aSelector userInfo:userInfo repeats:yesOrNo];
 #pragma clang diagnostic pop
 }
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initTimerHelperWithDelay:(NSTimeInterval)delay
-                            timeInterval:(NSTimeInterval)timeInterval
+                                interval:(NSTimeInterval)interval
                                   target:(id)aTarget
                                 selector:(SEL)aSelector
                                 userInfo:(nullable id)userInfo
@@ -179,7 +179,7 @@
         self.userInfo = userInfo;
         
         self.timer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:delay]
-                                              interval:timeInterval
+                                              interval:interval
                                                 target:[WJTimerProxy proxyWithTarget:self]
                                               selector:@selector(timerAction:)
                                               userInfo:userInfo

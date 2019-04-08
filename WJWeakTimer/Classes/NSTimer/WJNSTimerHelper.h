@@ -131,7 +131,7 @@ typedef void(^WJNSTimerCallback)(WJNSTimerHelper *timerHelper);
  调用计时器开始计时
 
  @param delay 延迟多少秒后开始计时
- @param timeInterval 计时间隔
+ @param interval 计时间隔
  @param aTarget 接受消息的目标对象
  @param aSelector 接受消息的选择器
  @param userInfo 自定义信息
@@ -141,7 +141,7 @@ typedef void(^WJNSTimerCallback)(WJNSTimerHelper *timerHelper);
  @return ‘WJNSTimerHelper’实例
  */
 + (instancetype)scheduledTimerWithDelay:(NSTimeInterval)delay
-                           timeInterval:(NSTimeInterval)timeInterval
+                               interval:(NSTimeInterval)interval
                                  target:(id)aTarget
                                selector:(SEL)aSelector
                                userInfo:(nullable id)userInfo
@@ -156,18 +156,18 @@ typedef void(^WJNSTimerCallback)(WJNSTimerHelper *timerHelper);
 /**
  指定初始化方法(需要手动添加到RunLoop)
  
- @param timeInterval 计时间隔
+ @param interval 计时间隔
  @param aTarget 接受消息的目标对象
  @param aSelector 接受消息的选择器
  @param userInfo 自定义信息
  @param yesOrNo YES：重复计时，NO：单次计时
  @return ‘WJNSTimerHelper’实例
  */
-- (instancetype)initTimerHelperWithTimeInterval:(NSTimeInterval)timeInterval
-                                         target:(id)aTarget
-                                       selector:(SEL)aSelector
-                                       userInfo:(nullable id)userInfo
-                                        repeats:(BOOL)yesOrNo NS_DESIGNATED_INITIALIZER;
+- (instancetype)initTimerHelperWithInterval:(NSTimeInterval)interval
+                                     target:(id)aTarget
+                                   selector:(SEL)aSelector
+                                   userInfo:(nullable id)userInfo
+                                    repeats:(BOOL)yesOrNo NS_DESIGNATED_INITIALIZER;
 
 /** 关闭计时器 */
 - (void)stopTimer;

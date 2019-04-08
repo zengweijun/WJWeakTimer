@@ -74,6 +74,9 @@
 		2C24AD44225B157C00F272C5 /* WJTimerProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJTimerProxy.m; sourceTree = "<group>"; };
 		2C24AD46225B157C00F272C5 /* WJNSTimerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJNSTimerHelper.h; sourceTree = "<group>"; };
 		2C24AD47225B157C00F272C5 /* WJNSTimerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJNSTimerHelper.m; sourceTree = "<group>"; };
+		2C24AD4C225B40E300F272C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		2C24AD4D225B40E400F272C5 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		2C24AD4E225B40E400F272C5 /* WJWeakTimer.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = WJWeakTimer.podspec; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +147,9 @@
 			children = (
 				2C24ACFF225B015F00F272C5 /* WJWeakTimerTests.m */,
 				2C24AD01225B015F00F272C5 /* Info.plist */,
+				2C24AD4D225B40E400F272C5 /* LICENSE */,
+				2C24AD4C225B40E300F272C5 /* README.md */,
+				2C24AD4E225B40E400F272C5 /* WJWeakTimer.podspec */,
 			);
 			path = WJWeakTimerTests;
 			sourceTree = "<group>";
@@ -185,8 +191,8 @@
 		2C24AD3A225B157C00F272C5 /* CGDTimer */ = {
 			isa = PBXGroup;
 			children = (
-				2C24AD3B225B157C00F272C5 /* WJGCDTimerHelper.m */,
 				2C24AD3C225B157C00F272C5 /* WJGCDTimerHelper.h */,
+				2C24AD3B225B157C00F272C5 /* WJGCDTimerHelper.m */,
 			);
 			path = CGDTimer;
 			sourceTree = "<group>";

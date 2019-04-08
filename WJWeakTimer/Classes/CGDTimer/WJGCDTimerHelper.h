@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class WJGCDTimerHelper;
-typedef void(^WJGCDTimerHelperCallback)(WJGCDTimerHelper *timerHelper);
+typedef void(^WJGCDTimerCallback)(WJGCDTimerHelper *timerHelper);
 
 /**
  该类是对GCDTimer的封装，使用无需考虑定时器生命周期
@@ -24,40 +24,40 @@ typedef void(^WJGCDTimerHelperCallback)(WJGCDTimerHelper *timerHelper);
 /**
  调用计时器开始计时
 
- @param timerInterval 计时间隔
- @param timerCallback 计时回调
+ @param interval 计时间隔
+ @param block 计时回调
  @return ‘WJGCDTimerHelper’实例
  */
-+ (instancetype)scheduledTimerWithTimerInterval:(NSTimeInterval)timerInterval
-                                  timerCallback:(WJGCDTimerHelperCallback)timerCallback;
++ (instancetype)scheduledTimer:(NSTimeInterval)interval
+                         block:(WJGCDTimerCallback)block;
 
 /**
  调用计时器开始计时
 
- @param timerInterval 计时间隔
- @param yesOrNo YES：重复计时，NO：单次计时
- @param timerCallback 计时回调
+ @param interval 计时间隔
+ @param repeats YES：重复计时，NO：单次计时
+ @param block 计时回调
  @return ‘WJGCDTimerHelper’实例
  */
-+ (instancetype)scheduledTimerWithTimerInterval:(NSTimeInterval)timerInterval
-                                        repeats:(BOOL)yesOrNo
-                                  timerCallback:(WJGCDTimerHelperCallback)timerCallback;
++ (instancetype)scheduledTimer:(NSTimeInterval)interval
+                       repeats:(BOOL)repeats
+                         block:(WJGCDTimerCallback)block;
 
 /**
  调用计时器开始计时
 
  @param delay 延迟多少秒后开始计时
- @param timerInterval 计时间隔
- @param yesOrNo YES：重复计时，NO：单次计时
+ @param interval 计时间隔
+ @param repeats YES：重复计时，NO：单次计时
  @param async 是否在子线程中执行计时
- @param timerCallback 计时回调
+ @param block 计时回调
  @return ‘WJGCDTimerHelper’实例
  */
 + (instancetype)scheduledTimerWithDelay:(NSTimeInterval)delay
-                          timerInterval:(NSTimeInterval)timerInterval
-                                repeats:(BOOL)yesOrNo
+                               interval:(NSTimeInterval)interval
+                                repeats:(BOOL)repeats
                                   async:(BOOL)async
-                          timerCallback:(WJGCDTimerHelperCallback)timerCallback;
+                                  block:(WJGCDTimerCallback)block;
 
 /**
  调用计时器开始计时
@@ -87,13 +87,13 @@ typedef void(^WJGCDTimerHelperCallback)(WJGCDTimerHelper *timerHelper);
  @param timerInterval 计时间隔
  @param yesOrNo YES：重复计时，NO：单次计时
  @param async 是否在子线程中执行计时
- @param timerCallback 计时回调
+ @param block 计时回调
  @return ‘WJGCDTimerHelper’实例
  */
 - (instancetype)initWithTimerInterval:(NSTimeInterval)timerInterval
                               repeats:(BOOL)yesOrNo
                                 async:(BOOL)async
-                        timerCallback:(WJGCDTimerHelperCallback)timerCallback
+                                block:(WJGCDTimerCallback)block
                         NS_DESIGNATED_INITIALIZER;
 
 /** 关闭计时器 */

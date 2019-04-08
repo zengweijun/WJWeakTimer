@@ -45,7 +45,7 @@ static inline dispatch_source_t gcdTimer(void(^task)(void), NSTimeInterval delay
 @property (nonatomic, assign) NSTimeInterval timerInterval;
 
 @property (nonatomic, strong, readwrite) id userInfo;
-@property (nonatomic, copy) WJGCDTimerHelperCallback timerCallback;
+@property (nonatomic, copy) WJGCDTimerCallback timerCallback;
 
 @end
 
@@ -53,27 +53,33 @@ static inline dispatch_source_t gcdTimer(void(^task)(void), NSTimeInterval delay
 
 #pragma mark - Public method
 
-+ (instancetype)scheduledTimerWithTimerInterval:(NSTimeInterval)timerInterval
-                                  timerCallback:(WJGCDTimerHelperCallback)timerCallback {
-    return [self scheduledTimerWithTimerInterval:timerInterval repeats:YES timerCallback:timerCallback];
++ (instancetype)scheduledTimer:(NSTimeInterval)interval
+                         block:(WJGCDTimerCallback)block {
+    return [self scheduledTimer:interval
+                        repeats:YES
+                          block:block];
 }
 
-+ (instancetype)scheduledTimerWithTimerInterval:(NSTimeInterval)timerInterval
-                                        repeats:(BOOL)yesOrNo
-                                  timerCallback:(WJGCDTimerHelperCallback)timerCallback {
-    return [self scheduledTimerWithDelay:0.f timerInterval:timerInterval repeats:yesOrNo async:NO timerCallback:timerCallback];
++ (instancetype)scheduledTimer:(NSTimeInterval)interval
+                       repeats:(BOOL)repeats
+                         block:(WJGCDTimerCallback)block {
+    return [self scheduledTimerWithDelay:interval
+                                interval:interval
+                                 repeats:repeats
+                                   async:NO
+                                   block:block];
 }
 
 + (instancetype)scheduledTimerWithDelay:(NSTimeInterval)delay
-                          timerInterval:(NSTimeInterval)timerInterval
-                                repeats:(BOOL)yesOrNo
+                               interval:(NSTimeInterval)interval
+                                repeats:(BOOL)repeats
                                   async:(BOOL)async
-                          timerCallback:(WJGCDTimerHelperCallback)timerCallback {
+                                  block:(WJGCDTimerCallback)block {
     
-    return [[self alloc] initWithTask:timerCallback
+    return [[self alloc] initWithTask:block
                                 delay:delay
-                        timerInterval:timerInterval
-                              repeats:yesOrNo
+                        timerInterval:interval
+                              repeats:repeats
                                 async:async
                            startTimer:YES];
 }
@@ -81,7 +87,7 @@ static inline dispatch_source_t gcdTimer(void(^task)(void), NSTimeInterval delay
 + (instancetype)scheduledTimerWithTarget:(id)aTarget
                                 selector:(SEL)aSelector
                                    delay:(NSTimeInterval)delay
-                           timerInterval:(NSTimeInterval)timerInterval
+                                interval:(NSTimeInterval)interval
                                  repeats:(BOOL)yesOrNo
                                    async:(BOOL)async {
     
@@ -98,7 +104,7 @@ static inline dispatch_source_t gcdTimer(void(^task)(void), NSTimeInterval delay
         }
     }
                                                          delay:delay
-                                                 timerInterval:timerInterval
+                                                 timerInterval:interval
                                                        repeats:yesOrNo
                                                          async:async
                                                     startTimer:YES];
@@ -109,11 +115,11 @@ static inline dispatch_source_t gcdTimer(void(^task)(void), NSTimeInterval delay
 - (instancetype)initWithTimerInterval:(NSTimeInterval)timerInterval
                               repeats:(BOOL)yesOrNo
                                 async:(BOOL)async
-                        timerCallback:(WJGCDTimerHelperCallback)timerCallback {
+                                block:(WJGCDTimerCallback)block {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-    return [self initWithTask:timerCallback
-                        delay:0.f
+    return [self initWithTask:block
+                        delay:timerInterval
                 timerInterval:timerInterval
                       repeats:yesOrNo
                         async:async
@@ -132,7 +138,7 @@ static inline dispatch_source_t gcdTimer(void(^task)(void), NSTimeInterval delay
         return;
     }
     
-    [self _createTimerAndResumeWithDelay:0.f];
+    [self _createTimerAndResumeWithDelay:self.timerInterval];
     [self resumeTimer];
 }
 
@@ -156,7 +162,7 @@ static inline dispatch_source_t gcdTimer(void(^task)(void), NSTimeInterval delay
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-- (instancetype)initWithTask:(WJGCDTimerHelperCallback)task
+- (instancetype)initWithTask:(WJGCDTimerCallback)task
                        delay:(NSTimeInterval)delay
                timerInterval:(NSTimeInterval)timerInterval
                      repeats:(BOOL)yesOrNo

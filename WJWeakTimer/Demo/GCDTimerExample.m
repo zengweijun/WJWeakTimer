@@ -22,7 +22,7 @@
     NSLog(@"%s", __func__);
     
     self.timerHelper =
-    [WJGCDTimerHelper scheduledTimerWithTimerInterval:1 timerCallback:^(WJGCDTimerHelper * _Nonnull timerHelper) {
+    [WJGCDTimerHelper scheduledTimer:3 repeats:NO block:^(WJGCDTimerHelper * _Nonnull timerHelper) {
         NSLog(@"%@", timerHelper);
     }];
     
