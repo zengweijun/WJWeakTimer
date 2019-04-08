@@ -3,7 +3,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "WJWeakTimer" 
-  s.version      = "0.0.2"       
+  s.version      = "0.0.3"
   s.license      = "MIT"          
   s.summary      = "WJWeakTimer是一个避免循环引用的Timer组件.包含NSTimer、CGDTimer和CADisplayLink的封装" 
 

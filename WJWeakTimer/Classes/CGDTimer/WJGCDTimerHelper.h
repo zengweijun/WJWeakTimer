@@ -65,7 +65,7 @@ typedef void(^WJGCDTimerCallback)(WJGCDTimerHelper *timerHelper);
  @param aTarget 接受消息的目标对象
  @param aSelector 接受消息的选择器
  @param delay 延迟多少秒后开始计时
- @param timerInterval 计时间隔
+ @param interval 计时间隔
  @param yesOrNo YES：重复计时，NO：单次计时
  @param async 是否在子线程中执行计时
  @return ‘WJGCDTimerHelper’实例
@@ -73,7 +73,7 @@ typedef void(^WJGCDTimerCallback)(WJGCDTimerHelper *timerHelper);
 + (instancetype)scheduledTimerWithTarget:(id)aTarget
                                 selector:(SEL)aSelector
                                    delay:(NSTimeInterval)delay
-                           timerInterval:(NSTimeInterval)timerInterval
+                                interval:(NSTimeInterval)interval
                                  repeats:(BOOL)yesOrNo
                                    async:(BOOL)async;
 
