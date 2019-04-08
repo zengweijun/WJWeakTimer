@@ -1,0 +1,2 @@
+# WJWeakTimer
+一个无需考虑生命周期的定时器，主要实现对NSTimer和GCDTimer的封装
